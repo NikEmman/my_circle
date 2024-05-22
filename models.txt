@@ -1,0 +1,29 @@
+Model: User (devise), columns: email, password
+	has_one :profile, 
+	has_many :followers, through: followees_followers, foreign_key: "follower_id"
+	has_many :followees, through: followees_followers, foreign_key: "followee_id"
+	has_many :comments
+	has_many :posts
+	has_many :liked_posts, through: liker_liked_posts, foreign_key: "liker_id"
+	has_many :liked_comments, through: liker_liked_comments, foreign_key: "liker_id"
+
+Model: Followees_followers, column: followee_id, follower_id
+	belongs_to: followee, class: "User"
+	belongs_to: follower, class: "User"
+
+Model: Liker_liked_comments, columns: liker_id, liked_comment_id
+	belongs_to :liker, class: "User"
+	belongs_to :liked_comment, class "Comment"
+
+Model: Liker_liked_posts, columns: liker_id, liked_post_id
+	belongs_to :liker, class: "User"
+	belongs_to :liked_post, class "Post"
+
+Model: Profile, columns: first_name, last_name
+	belongs_to :user
+	has_one_attached :avatar
+
+
+Model: Comment, columns: body, user_id
+	belongs_to :user
+	belongs_to :post
