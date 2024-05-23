@@ -1,5 +1,5 @@
 class FeedController < ApplicationController
   def index
-    @comments = Comment.all
+    @posts = current_user.posts.order(created_at: :desc)
   end
 end

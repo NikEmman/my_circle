@@ -1,5 +1,9 @@
 <div>
-  <% @comments.each do |comment|%>
-    <div><%= comment.body%></div>
+  <% @posts.each do |post|%>
+    <div class= "mb-2 text-sm text-gray-600"><%= post.body%></div>
+    <hr class="mt-4">
+    <% post.comments.each do |comment|%>
+      <small><%=comment.body%></small>
+    <%end%>
   <%end%>
 </div>

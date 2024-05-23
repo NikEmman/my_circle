@@ -7,8 +7,11 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+User.find_or_create_by(email: 'mickey@mail.com', password: 'password')
+User.find_or_create_by(email: 'goofey@mail.com', password: 'password')
 FolloweesFollower.find_or_create_by(followee_id: 1, follower_id: 2)
 Profile.find_or_create_by(user_id: 1, first_name: 'Mickey', last_name: 'Mouse')
+Profile.find_or_create_by(user_id: 2, first_name: 'Goofey', last_name: 'Dawg')
 Post.find_or_create_by(body: "This is Mickey's post", user_id: 1)
 Post.find_or_create_by(body: "This is Goofey's post", user_id: 2)
 Comment.find_or_create_by(body: " I'm Goofey's comment on Mickey's post", post_id: 1, user_id: 2)
