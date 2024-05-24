@@ -1,9 +1,5 @@
 <div>
   <% @posts.each do |post|%>
-    <div class= "mb-2 text-sm text-gray-600"><%= post.body%></div>
-    <hr class="mt-4">
-    <% post.comments.each do |comment|%>
-      <small><%=comment.body%></small>
-    <%end%>
+    <%= render partial: "feed/post", locals: { post: post } %>
   <%end%>
 </div>
