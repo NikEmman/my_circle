@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   root 'feed#index'
   get 'feed/index'
+  # devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+    #  get 'users/:id', to: 'users/registrations#show', as: 'user'
+  end
   resources :comments, only: %i[create edit delete]
   resources :posts
   devise_for :users
