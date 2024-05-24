@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
   before_action :require_permission, only: %i[edit destroy]
   before_action :set_post, only: %i[show edit update destroy]
 
@@ -23,7 +22,9 @@ class PostsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @comment = Comment.new
+  end
 
   def edit; end
 

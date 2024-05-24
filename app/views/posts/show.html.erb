@@ -1,0 +1,3 @@
+<h1><%= "#{@post.user.profile.first_name}'s post"%></h1>
+<article><%=@post.body%></article>
+<%= render partial: "shared/form", locals: { model: [@post, @comment] }%>

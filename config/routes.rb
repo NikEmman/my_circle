@@ -6,8 +6,9 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
     #  get 'users/:id', to: 'users/registrations#show', as: 'user'
   end
-  resources :comments, only: %i[create edit delete]
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

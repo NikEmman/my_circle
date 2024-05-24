@@ -7,8 +7,6 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-User.find_or_create_by(email: 'mickey@mail.com', password: 'password')
-User.find_or_create_by(email: 'goofey@mail.com', password: 'password')
 FolloweesFollower.find_or_create_by(followee_id: 1, follower_id: 2)
 Profile.find_or_create_by(user_id: 1, first_name: 'Mickey', last_name: 'Mouse')
 Profile.find_or_create_by(user_id: 2, first_name: 'Goofey', last_name: 'Dawg')
