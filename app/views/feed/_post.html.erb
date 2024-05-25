@@ -1,8 +1,9 @@
 <p><b><%=post.user.profile.first_name? ? post.user.profile.first_name : "Anonymous" %></b> wrote:</p>
 <div><%= post.body%></div>
 <hr>
+<small><%=post.comments.count %> <b>Comments</b></small>
 <% post.comments.each do |comment|%>
-  <small><%=comment.body%></small>
-  <hr>
+  <%= render partial: "feed/comment", locals: { comment: comment } %>
 <%end%>
+<br>
 <br>
