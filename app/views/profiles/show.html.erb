@@ -1,1 +1,12 @@
-<h1>This is the profile show page</h1>
+<h1><%if @profile.first_name%>
+    <%=@profile.first_name.capitalize%>'s profile
+  <%else%>
+    Anonymoys profile
+  <%end%>
+</h1>
+<h3>Latest posts</h3>
+<div>
+  <% @profile.user.posts.each do |post|%>
+    <%= render partial: "shared/post", locals: { post: post } %>
+  <%end%>
+</div>

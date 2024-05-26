@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
-  before_action :require_permission, only: %i[edit destroy]
-  before_action :set_profile, only: %i[show edit update destroy]
+  before_action :require_permission, only: %i[edit]
+  before_action :set_profile, only: %i[show edit update]
   def new
     @profile = Profile.new
   end

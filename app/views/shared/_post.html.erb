@@ -3,7 +3,7 @@
 <hr>
 <small><%=post.comments.count %> <b>Comments</b></small>
 <% post.comments.each do |comment|%>
-  <%= render partial: "feed/comment", locals: { comment: comment } %>
+  <%= render partial: "shared/comment", locals: { comment: comment } %>
 <%end%>
 <br>
 <br>
