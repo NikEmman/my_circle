@@ -1,4 +1,4 @@
-<p><b><%=post.user.profile.first_name? ? post.user.profile.first_name : "Anonymous" %></b> wrote:</p>
+<p><b><%=post.user.profile ? post.user.profile.first_name : "Anonymous" %></b> wrote:</p>
 <div><%= post.body%></div>
 <hr>
 <small><%=post.comments.count %> <b>Comments</b></small>
