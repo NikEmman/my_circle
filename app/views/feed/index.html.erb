@@ -3,3 +3,9 @@
     <%= render partial: "shared/post", locals: { post: post } %>
   <%end%>
 </div>
+<div>
+  <ul>Find people to follow:</ul>
+  <% User.all.each do |user|%>
+    <li><%= link_to "#{user.profile.first_name}", profile_url(user.profile)%></li>
+  <%end%>
+</div>

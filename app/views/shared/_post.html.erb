@@ -1,11 +1,12 @@
 <div>
-  <div style="width:56px;fheight:auto;"><img src="assets/default" alt="default profile picture"></div>
+  <div style="width:56px;fheight:auto;"><img src="assets/default.jpg" alt="default profile picture"></div>
   <p><b>
       <% if post.user.profile %>
         <%= link_to "#{post.user.profile.first_name}", profile_url(post.user.profile)%>
       <%else%>
         <%="Anonymous" %>
       <%end%></b> wrote:</p>
+  <p><%= time_ago_in_words(post.created_at) %></p>
 </div>
 <div><%= post.body%></div>
 <hr>
