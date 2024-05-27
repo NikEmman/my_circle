@@ -1,4 +1,12 @@
-<p><b><%=post.user.profile ? post.user.profile.first_name : "Anonymous" %></b> wrote:</p>
+<div>
+  <div style="width:56px;fheight:auto;"><img src="assets/default" alt="default profile picture"></div>
+  <p><b>
+      <% if post.user.profile %>
+        <%= link_to "#{post.user.profile.first_name}", profile_url(post.user.profile)%>
+      <%else%>
+        <%="Anonymous" %>
+      <%end%></b> wrote:</p>
+</div>
 <div><%= post.body%></div>
 <hr>
 <small><%=post.comments.count %> <b>Comments</b></small>
