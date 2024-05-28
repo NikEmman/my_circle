@@ -1,18 +1,21 @@
 <div>
-  <div style="width:56px;fheight:auto;"><img src="assets/default.jpg" alt="default profile picture"></div>
-  <p><b>
-      <% if post.user.profile %>
-        <%= link_to "#{post.user.profile.first_name}", profile_url(post.user.profile)%>
-      <%else%>
-        <%="Anonymous" %>
-      <%end%></b> wrote:</p>
-  <p><%= time_ago_in_words(post.created_at) %></p>
+  <div>
+    <div style="width:56px;fheight:auto;"><img src="assets/default.jpg" alt="default profile picture"></div>
+    <p><b>
+        <% if post.user.profile %>
+          <%= link_to "#{post.user.profile.first_name}", profile_url(post.user.profile)%>
+        <%else%>
+          <%="Anonymous" %>
+        <%end%></b> wrote:</p>
+    <p><%= time_ago_in_words(post.created_at) %></p>
+  </div>
+  <div><%= post.body%></div>
+  <small><%=post.comments.count %> <b>Comments</b></small>
+  <br>
+  <% post.comments.each do |comment|%>
+    <%= render partial: "shared/comment", locals: { comment: comment } %>
+  <%end%>
+  <%= link_to "Comment", post_url(post)%>
 </div>
-<div><%= post.body%></div>
-<hr>
-<small><%=post.comments.count %> <b>Comments</b></small>
-<% post.comments.each do |comment|%>
-  <%= render partial: "shared/comment", locals: { comment: comment } %>
-<%end%>
 <br>
 <br>
