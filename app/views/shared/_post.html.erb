@@ -1,6 +1,7 @@
 <div>
   <div>
-    <div style="width:56px;fheight:auto;"><img src="assets/default.jpg" alt="default profile picture"></div>
+    <div style="width:56px;fheight:auto;"><img src="<%= image_path('default.jpg') %>" alt="default profile picture">
+    </div>
     <p><b>
         <% if post.user.profile %>
           <%= link_to "#{post.user.profile.first_name}", profile_url(post.user.profile)%>
