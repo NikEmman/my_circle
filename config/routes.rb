@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
-  root 'feed#index'
-  get 'feed/index'
+  root 'posts#index'
   # devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
     #  get 'users/:id', to: 'users/registrations#show', as: 'user'
   end
   resources :posts do
+    resources :liker_liked_posts, only: %i[create destroy]
     resources :comments
   end
   devise_for :users

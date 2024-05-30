@@ -10,6 +10,20 @@
         <%end%></b> wrote:</p>
     <p><%= time_ago_in_words(post.created_at) %></p>
   </div>
+  <div>
+    <span><%=post.likers.count%></span>
+    <% if LikerLikedPost.exists?(liker_id: current_user.id, liked_post_id: post.id) %>
+      <%= button_to 'Unlike', post_liker_liked_post_path(post_id: post.id, id: LikerLikedPost.find_by(liker_id: current_user.id, liked_post_id: post.id).id), method: :delete %>
+    <% else %>
+      <%= form_with model: [post, LikerLikedPost.new], local: true do |form| %>
+        <%= form.submit "Like" %>
+      <% end %>
+    <% end %>
+    <%= link_to "Edit", edit_post_path(post) %>
+    <%= button_to "Delete event", post, method: :delete%>
+    <%= link_to "Back", root_path%>
+  </div>
+  <br>
   <div><%= post.body%></div>
   <small><%=post.comments.count %> <b>Comments</b></small>
   <br>
