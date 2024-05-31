@@ -3,4 +3,6 @@ class FollowRequest < ApplicationRecord
   belongs_to :requester, class_name: 'User', foreign_key: 'requester_id'
   belongs_to :approver, class_name: 'User', foreign_key: 'approver_id'
   scope :pending, -> { where(status: 0) }
+  validates :requester_id, presence: true
+  validates :approver_id, presence: true
 end
