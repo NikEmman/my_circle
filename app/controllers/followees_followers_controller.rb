@@ -1,4 +1,5 @@
 class FolloweesFollowersController < ApplicationController
+  before_action :ensure_profile_exists
   before_action :set_profile
   def destroy
     @followees_follower = FolloweesFollower.find_by(follower_id: current_user.id, followee_id: @profile.user.id.to_i)

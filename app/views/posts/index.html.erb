@@ -1,13 +1,18 @@
-<div>
-  <% @posts.each do |post|%>
-    <%= render partial: "shared/post", locals: { post: post } %>
-  <%end%>
-</div>
-<div>
-  <ul>Find people to follow:</ul>
-  <% User.all.each do |user|%>
-    <%if user.profile && user != current_user%>
-      <li><%= link_to "#{user.profile.first_name} #{user.profile.last_name}", profile_url(user.profile) %></li>
+<%if current_user.profile%>
+  <div>
+    <% @posts.each do |post|%>
+      <%= render partial: "shared/post", locals: { post: post } %>
     <%end%>
-  <%end%>
-</div>
+  </div>
+  <div>
+    <ul>Find people to follow:</ul>
+    <% User.all.each do |user|%>
+      <%if user.profile && user != current_user%>
+        <li><%= link_to "#{user.profile.first_name} #{user.profile.last_name}", profile_url(user.profile) %></li>
+      <%end%>
+    <%end%>
+  </div>
+<% else%>
+  <h1>Welcome to My Circle&trade;!</h1>
+  <p><%=link_to "Create a Profile", new_profile_path%> to get started!</p>
+<%end%>

@@ -1,5 +1,6 @@
 class LikerLikedCommentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :ensure_profile_exists
+
   before_action :set_comment, only: %i[create destroy]
 
   def create

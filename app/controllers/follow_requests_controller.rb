@@ -1,4 +1,6 @@
 class FollowRequestsController < ApplicationController
+  before_action :ensure_profile_exists
+
   def create
     @follow_request = FollowRequest.build(requester_id: current_user.id,
                                           approver_id: Profile.find(params[:profile_id]).user.id)

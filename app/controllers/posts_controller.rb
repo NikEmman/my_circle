@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :require_permission, only: %i[edit destroy]
   before_action :set_post, only: %i[show edit update destroy]
+  before_action :ensure_profile_exists
 
   def index
     @posts = current_user.posts
