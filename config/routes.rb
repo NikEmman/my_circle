@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   end
   resources :posts do
     resources :liker_liked_posts, only: %i[create destroy]
-    resources :comments
+    resources :comments do
+      resources :liker_liked_comments, only: %i[create destroy]
+    end
   end
   devise_for :users
 

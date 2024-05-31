@@ -7,4 +7,16 @@
   <p><%= time_ago_in_words(comment.created_at) %></p>
 </small>
 <small><%=comment.body%></small>
+<div>
+  <span><%=comment.likers.count%></span>
+  <% if LikerLikedComment.exists?(liker_id: current_user.id, liked_comment_id: comment.id) %>
+    <%= button_to 'Unlike', post_comment_liker_liked_comment_path(comment_id: comment.id,post_id: comment.post.id, id: LikerLikedComment.find_by(liker_id: current_user.id, liked_comment_id: comment.id).id), method: :delete %>
+  <% else %>
+    <%= form_with model: [comment, LikerLikedComment.new], url: post_comment_liker_liked_comments_path(post_id: comment.post.id, comment_id: comment.id), local: true do |form| %>
+      <%= form.submit "Like" %>
+    <% end %>
+  <% end %>
+  <%= link_to "Edit", edit_post_comment_path(id:comment.id, post_id: comment.post.id) %>
+  <%= button_to "Delete event", post_comment_path(id:comment.id, post_id: comment.post.id), method: :delete%>
+</div>
 <hr>

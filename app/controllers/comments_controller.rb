@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
 
   def new
     @comment = Comment.new
+    @liker_liked_comment = LikerLikedComment.new
   end
 
   def create
