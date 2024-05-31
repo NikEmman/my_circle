@@ -6,6 +6,13 @@
     Anonymoys profile
   <%end%>
 </h1>
+<%if current_user.id == @profile.user.id && current_user.pending_requests%>
+  <ul>You have friend requests by: 
+    <%current_user.pending_requests.each do |request|%>
+      <li><%="#{request.requester.profile.first_name} #{request.requester.profile.last_name}"%>   <%= render partial: "shared/accept_form", locals: { request: request } %></li>
+    <%end%>
+  </ul>
+<%end%>
 <%unless current_user.id == @profile.user.id || FollowRequest.exists?(requester_id: current_user.id, approver_id: @profile.user.id) %>
   <%= render partial: "shared/request_form", locals: { follow_request_form: @follow_request } %>
 <%end%>
