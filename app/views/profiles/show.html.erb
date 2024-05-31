@@ -6,10 +6,14 @@
     Anonymoys profile
   <%end%>
 </h1>
-<%if current_user.id == @profile.user.id && current_user.pending_requests%>
+<%if current_user.id == @profile.user.id && current_user.pending_requests.pending%>
   <ul>You have friend requests by: 
-    <%current_user.pending_requests.each do |request|%>
-      <li><%="#{request.requester.profile.first_name} #{request.requester.profile.last_name}"%>   <%= render partial: "shared/accept_form", locals: { request: request } %></li>
+    <%current_user.pending_requests.pending.each do |request|%>
+      <li>
+        <%="#{request.requester.profile.first_name} #{request.requester.profile.last_name}"%>
+        <%= render partial: "shared/accept_form", locals: { request: request } %>
+        <%= render partial: "shared/reject_form", locals: { request: request } %>
+      </li>
     <%end%>
   </ul>
 <%end%>

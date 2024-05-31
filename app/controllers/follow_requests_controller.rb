@@ -15,12 +15,18 @@ class FollowRequestsController < ApplicationController
     @follow_request = FollowRequest.find_by(approver_id: current_user.id)
 
     respond_to do |format|
-      if @follow_request.update(status: 1) # Set status to "accepted"
-        format.html do
-          redirect_to profile_path(params[:profile_id]), notice: 'Follow request was successfully answered!'
+      ActiveRecord::Base.transaction do
+        if @follow_request.update(status: params[:follow_request][:status].to_i)
+          if @follow_request.status == 'accepted'
+            FolloweesFollower.create!(followee_id: @follow_request.approver_id,
+                                      follower_id: @follow_request.requester_id)
+          end
+          format.html do
+            redirect_to profile_path(params[:profile_id]), notice: 'Follow request was successfully answered!'
+          end
+        else
+          format.html { redirect_to profile_path(params[:profile_id]), status: :unprocessable_entity }
         end
-      else
-        format.html { redirect_to profile_path(params[:profile_id]), status: :unprocessable_entity }
       end
     end
   end
