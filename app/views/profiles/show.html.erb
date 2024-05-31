@@ -6,6 +6,9 @@
     Anonymoys profile
   <%end%>
 </h1>
+<%if FolloweesFollower.exists?(follower_id: current_user.id, followee_id: @profile.user.id)%>
+  <%= button_to 'Unfollow', followees_follower_path(follower_id: current_user.id, followee_id: @profile.user.id), method: :delete %>
+<%end%>
 <%if current_user.id == @profile.user.id && current_user.pending_requests.pending%>
   <ul>You have friend requests by: 
     <%current_user.pending_requests.pending.each do |request|%>

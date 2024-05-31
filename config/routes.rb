@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
     #  get 'users/:id', to: 'users/registrations#show', as: 'user'
   end
+  resources :followees_followers, only: :destroy
   resources :posts do
     resources :liker_liked_posts, only: %i[create destroy]
     resources :comments do
