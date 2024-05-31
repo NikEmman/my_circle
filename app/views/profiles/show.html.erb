@@ -6,6 +6,9 @@
     Anonymoys profile
   <%end%>
 </h1>
+<%unless current_user.id == @profile.user.id || FollowRequest.exists?(requester_id: current_user.id, approver_id: @profile.user.id) %>
+  <%= render partial: "shared/request_form", locals: { follow_request_form: @follow_request } %>
+<%end%>
 <br>
 <br>
 <h3>Latest posts</h3>

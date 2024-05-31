@@ -7,10 +7,3 @@
 # Search bar on feed find more people to follow
 
 Use a search bar, use stimulus to show results on typing, details [on this vid](https://youtu.be/PfCU0Nni8fI?si=PIQbt8TGuJkAeuz1)
-
-# Add a comment creation form
-
-Maybe under each post, use this [tutorial](https://youtu.be/csvaYIaBYpw?si=NHVvOOhIuAvKSagH) to instantly update view
-
-# Add like function on posts and comments
-* Create controllers for liker_liked_posts and liker_liked_comments. Check [older repo](https://github.com/NikEmman/private-events/blob/main/app/controllers/attendee_events_controller.rb)

@@ -1,0 +1,3 @@
+<%= form_with(model: @follow_request, url: profile_follow_requests_path(@profile), local: true) do |f| %>
+  <%= f.submit "Follow" %>
+<% end %>

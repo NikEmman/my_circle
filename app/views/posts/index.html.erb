@@ -6,6 +6,8 @@
 <div>
   <ul>Find people to follow:</ul>
   <% User.all.each do |user|%>
-    <li><%= link_to "#{user.profile.first_name} #{user.profile.last_name}", profile_url(user.profile)%></li>
+    <%if user.profile && user != current_user%>
+      <li><%= link_to "#{user.profile.first_name} #{user.profile.last_name}", profile_url(user.profile) %></li>
+    <%end%>
   <%end%>
 </div>

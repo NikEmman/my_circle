@@ -1,9 +1,9 @@
-<%= form_with(model: model, local:true) do |form| %>
+<%= form_with(model: model, local: true) do |form| %>
   <div>
-    <%= form.label :body, style: "display: block" %>
+    <% model_name = model.class.name == "Post" ? "Post" : "Comment"%>
     <%= form.text_area :body %>
   </div>
   <div>
-    <%= form.submit "Create"%>
+    <%= form.submit "Create #{model_name}"%>
   </div>
 <% end %>
