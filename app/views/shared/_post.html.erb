@@ -2,13 +2,15 @@
   <div>
     <div style="width:56px;fheight:auto;"><img src="<%= image_path('default.jpg') %>" alt="default profile picture">
     </div>
+    <p><%= time_ago_in_words(post.created_at) %></p>
     <p><b>
         <% if post.user.profile %>
           <%= link_to "#{post.user.profile.first_name}", profile_url(post.user.profile)%>
         <%else%>
           <%="Anonymous" %>
-        <%end%></b> wrote:</p>
-    <p><%= time_ago_in_words(post.created_at) %></p>
+        <%end%></b> <%=link_to "wrote:", post_path(post)%></p>
+    <br>
+    <div><%= post.body%></div>
   </div>
   <div>
     <span><%=post.likers.count%></span>
@@ -19,8 +21,6 @@
         <%= form.submit "Like" %>
       <% end %>
     <% end %>
-    <br>
-    <div><%= post.body%></div>
     <br>
     <%if current_user == post.user%>
       <%= link_to "Edit Post", edit_post_path(post) %>
