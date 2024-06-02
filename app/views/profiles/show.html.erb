@@ -6,6 +6,7 @@
     Anonymoys profile
   <%end%>
 </h1>
+<div><%=link_to "Edit profile", edit_profile_path(@profile)%></div>
 <%if FolloweesFollower.exists?(follower_id: current_user.id, followee_id: @profile.user.id)%>
   <%= button_to 'Unfollow', followees_follower_path(follower_id: current_user.id, followee_id: @profile.user.id), method: :delete %>
 <%end%>
@@ -32,4 +33,6 @@
   <% @profile.user.posts.each do |post|%>
     <%= render partial: "shared/post", locals: { post: post } %>
   <%end%>
+</div>
+<div><%= link_to "Back", root_path%>
 </div>
