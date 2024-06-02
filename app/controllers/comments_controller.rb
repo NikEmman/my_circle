@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   before_action :ensure_profile_exists
 
   def new
+    @post = Post.find(params[:post_id])
     @comment = Comment.new
     @liker_liked_comment = LikerLikedComment.new
   end
@@ -14,9 +15,9 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to root_path, notice: 'Comment was successfully created.' }
+        format.html { redirect_to @post, notice: 'Comment was successfully created.' }
       else
-        format.html { render 'posts/show', status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end

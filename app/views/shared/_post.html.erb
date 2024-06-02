@@ -32,7 +32,7 @@
   <% post.comments.each do |comment|%>
     <%= render partial: "shared/comment", locals: { comment: comment } %>
   <%end%>
-  <%= link_to "Comment", post_url(post)%>
+  <%= link_to "Comment", new_post_comment_path(post)%>
 </div>
 <br>
 <br>
