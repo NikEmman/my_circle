@@ -19,12 +19,14 @@
         <%= form.submit "Like" %>
       <% end %>
     <% end %>
-    <%= link_to "Edit", edit_post_path(post) %>
-    <%= button_to "Delete Post", post, method: :delete%>
-    <%= link_to "Back", root_path%>
+    <br>
+    <div><%= post.body%></div>
+    <br>
+    <%if current_user == post.user%>
+      <%= link_to "Edit", edit_post_path(post) %>
+      <%= button_to "Delete Post", post, method: :delete%>
+    <%end%>
   </div>
-  <br>
-  <div><%= post.body%></div>
   <small><%=post.comments.count %> <b>Comments</b></small>
   <br>
   <% post.comments.each do |comment|%>

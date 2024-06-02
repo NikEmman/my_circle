@@ -16,7 +16,9 @@
       <%= form.submit "Like" %>
     <% end %>
   <% end %>
-  <%= link_to "Edit", edit_post_comment_path(id:comment.id, post_id: comment.post.id) %>
-  <%= button_to "Delete Comment", post_comment_path(id:comment.id, post_id: comment.post.id), method: :delete%>
+  <%if current_user == comment.user%>
+    <%= link_to "Edit", edit_post_comment_path(id:comment.id, post_id: comment.post.id) %>
+    <%= button_to "Delete Comment", post_comment_path(id:comment.id, post_id: comment.post.id), method: :delete%>
+  <%end%>
 </div>
 <hr>
