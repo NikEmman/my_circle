@@ -1,5 +1,8 @@
-<div style="width:100px;fheight:auto;"><img src="<%= image_path('default.jpg') %>" alt="default profile picture">
-</div>
+<%if @profile.avatar.attached?%>
+  <div><%= image_tag @profile.avatar, width: "200px"%></div>
+<%else%>
+  <div style="width:100px;"><img src="<%= image_path('default.jpg') %>" alt="default profile picture"></div>
+<%end%>
 <h1><%if @profile.first_name%>
     <%=@profile.first_name.capitalize%>'s profile
   <%else%>

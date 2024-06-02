@@ -1,38 +1,37 @@
 <div>
   <div>
-    <div style="width:56px;fheight:auto;"><img src="<%= image_path('default.jpg') %>" alt="default profile picture">
-    </div>
-    <p><%= time_ago_in_words(post.created_at) %></p>
-    <p><b>
-        <% if post.user.profile %>
-          <%= link_to "#{post.user.profile.first_name}", profile_url(post.user.profile)%>
-        <%else%>
-          <%="Anonymous" %>
-        <%end%></b> <%=link_to "wrote:", post_path(post)%></p>
-    <br>
-    <div><%= post.body%></div>
-  </div>
-  <div>
-    <span><%=post.likers.count%></span>
-    <% if LikerLikedPost.exists?(liker_id: current_user.id, liked_post_id: post.id) %>
-      <%= button_to 'Unlike', post_liker_liked_post_path(post_id: post.id, id: LikerLikedPost.find_by(liker_id: current_user.id, liked_post_id: post.id).id), method: :delete %>
-    <% else %>
-      <%= form_with model: [post, LikerLikedPost.new], local: true do |form| %>
-        <%= form.submit "Like" %>
-      <% end %>
-    <% end %>
-    <br>
-    <%if current_user == post.user%>
-      <%= link_to "Edit Post", edit_post_path(post) %>
-      <%= button_to "Delete Post", post, method: :delete%>
+    <%if post.user.profile.avatar.attached?%>
+      <div><%= image_tag post.user.profile.avatar, width: "56px" %></div>
+    <%else%>
+      <div style="width:56px;"><img src="<%= image_path('default.jpg') %>" alt="default profile picture"></div>
     <%end%>
+    <p><%= time_ago_in_words(post.created_at) %></p>
+    <div>
+      <b><%= link_to "#{post.user.profile.first_name}", profile_url(post.user.profile)%></b>
+      <br>
+      <div><%= post.body%></div>
+    </div>
+    <div>
+      <span><%=post.likers.count%></span>
+      <% if LikerLikedPost.exists?(liker_id: current_user.id, liked_post_id: post.id) %>
+        <%= button_to 'Unlike', post_liker_liked_post_path(post_id: post.id, id: LikerLikedPost.find_by(liker_id: current_user.id, liked_post_id: post.id).id), method: :delete %>
+      <% else %>
+        <%= form_with model: [post, LikerLikedPost.new], local: true do |form| %>
+          <%= form.submit "Like" %>
+        <% end %>
+      <% end %>
+      <br>
+      <%if current_user == post.user%>
+        <%= link_to "Edit Post", edit_post_path(post) %>
+        <%= button_to "Delete Post", post, method: :delete%>
+      <%end%>
+    </div>
+    <small><%=post.comments.count %> <b>Comments</b></small>
+    <br>
+    <% post.comments.each do |comment|%>
+      <%= render partial: "shared/comment", locals: { comment: comment } %>
+    <%end%>
+    <%= link_to "Comment", new_post_comment_path(post)%>
   </div>
-  <small><%=post.comments.count %> <b>Comments</b></small>
   <br>
-  <% post.comments.each do |comment|%>
-    <%= render partial: "shared/comment", locals: { comment: comment } %>
-  <%end%>
-  <%= link_to "Comment", new_post_comment_path(post)%>
-</div>
-<br>
-<br>
+  <br>
