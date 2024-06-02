@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root 'posts#index'
-  # devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
     #  get 'users/:id', to: 'users/registrations#show', as: 'user'
@@ -12,8 +11,7 @@ Rails.application.routes.draw do
       resources :liker_liked_comments, only: %i[create destroy]
     end
   end
-  devise_for :users
-
+  devise_for :users, controllers: { registrations: 'my_registrations' }
   resources :profiles do
     resources :follow_requests, only: %i[create update]
   end
