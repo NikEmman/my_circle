@@ -5,7 +5,7 @@ class LikerLikedPostsController < ApplicationController
   def create
     @liker_liked_post = current_user.liker_liked_posts.create(liked_post_id: params[:post_id])
     if @liker_liked_post.save
-      redirect_to posts_path
+      redirect_to @post
     else
       render 'post/show'
     end
@@ -14,7 +14,7 @@ class LikerLikedPostsController < ApplicationController
   def destroy
     @liker_liked_post = LikerLikedPost.find(params[:id])
     @liker_liked_post.destroy
-    redirect_to posts_path
+    redirect_to @post
   end
 
   private

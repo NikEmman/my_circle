@@ -6,7 +6,7 @@ class LikerLikedCommentsController < ApplicationController
   def create
     @liker_liked_comment = current_user.liker_liked_comments.create(liked_comment_id: params[:comment_id])
     if @liker_liked_comment.save
-      redirect_to posts_path
+      redirect_to @comment.post
     else
       render 'post/show'
     end
@@ -15,7 +15,7 @@ class LikerLikedCommentsController < ApplicationController
   def destroy
     @liker_liked_comment = LikerLikedComment.find(params[:id])
     @liker_liked_comment.destroy
-    redirect_to posts_path
+    redirect_to @comment.post
   end
 
   private
