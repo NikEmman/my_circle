@@ -32,7 +32,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to root_path, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to @post, notice: 'Comment was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -46,7 +46,8 @@ class CommentsController < ApplicationController
   private
 
   def set_comment
-    @comment = Comment.find(params[:id])
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.find(params[:id])
   end
 
   def comment_params

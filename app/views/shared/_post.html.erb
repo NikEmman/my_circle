@@ -23,7 +23,7 @@
     <div><%= post.body%></div>
     <br>
     <%if current_user == post.user%>
-      <%= link_to "Edit", edit_post_path(post) %>
+      <%= link_to "Edit Post", edit_post_path(post) %>
       <%= button_to "Delete Post", post, method: :delete%>
     <%end%>
   </div>
