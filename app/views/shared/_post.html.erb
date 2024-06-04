@@ -10,7 +10,7 @@
       <b><%= link_to "#{post.user.profile.full_name}", profile_path(post.user.profile)%></b>
       <span><%=link_to "wrote", post_path(post)%></span>
       <br>
-      <div><%= post.body%></div>
+      <div><%= simple_format(post.body)%></div>
     </div>
     <div>
       <span><%=post.likers.count%></span>

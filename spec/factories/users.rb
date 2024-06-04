@@ -5,6 +5,5 @@ FactoryBot.define do
     end
     encrypted_password { 'MyString' }
     password { 'password' }
-    id { 1 }
   end
 end

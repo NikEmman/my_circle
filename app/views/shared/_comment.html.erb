@@ -6,7 +6,7 @@
 <small>
   <p><%= time_ago_in_words(comment.created_at) %></p>
 </small>
-<small><%=comment.body%></small>
+<small><%=simple_format(comment.body)%></small>
 <div>
   <span><%=comment.likers.count%></span>
   <% if LikerLikedComment.exists?(liker_id: current_user.id, liked_comment_id: comment.id) %>
