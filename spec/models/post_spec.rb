@@ -1,18 +1,26 @@
+# spec/models/post_spec.rb
+
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  it ' is correctly associated to user' do
-    post = build(:post)
-    expect(post.user.id).to be(1)
+  let(:user) { create(:user) }
+
+  describe 'validations' do
+    it 'is valid with a body and a user' do
+      post = build(:post, user:)
+      expect(post).to be_valid
+    end
+
+    it 'is invalid without a body' do
+      post = build(:post, user:, body: nil)
+      expect(post).not_to be_valid
+    end
   end
 
-  it 'has a body' do
-    post = build(:post)
-    expect(post.body).to eq 'MyString post'
-  end
-
-  it 'validates presence of body' do
-    post = build(:post, body: '')
-    expect(post.valid?).to be false
+  describe 'associations' do
+    it { should belong_to(:user) }
+    it { should have_many(:comments).dependent(:destroy) }
+    it { should have_many(:liker_liked_posts).dependent(:destroy) }
+    it { should have_many(:likers).through(:liker_liked_posts) }
   end
 end
