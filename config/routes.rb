@@ -7,12 +7,12 @@ Rails.application.routes.draw do
   resources :followees_followers, only: :destroy
   resources :posts do
     resources :liker_liked_posts, only: %i[create destroy]
-    resources :comments do
+    resources :comments, except: :index do
       resources :liker_liked_comments, only: %i[create destroy]
     end
   end
   devise_for :users, controllers: { registrations: 'my_registrations' }
-  resources :profiles do
+  resources :profiles, except: %i[index destroy] do
     resources :follow_requests, only: %i[create update]
   end
 
