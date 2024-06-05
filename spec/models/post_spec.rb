@@ -6,7 +6,7 @@ RSpec.describe Post, type: :model do
   let(:user) { create(:user) }
   let(:post) { create(:post, user:) }
   let(:comment) { create(:comment, post:) }
-  describe 'validations' do
+  context 'validations' do
     it 'is valid with a body and a user' do
       expect(post).to be_valid
     end
