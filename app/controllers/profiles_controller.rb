@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
     @profile = current_user.build_profile(profile_params)
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Profile was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -25,7 +25,7 @@ class ProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @profile.update(profile_params)
-        format.html { redirect_to profile_path, notice: 'Profile was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Profile was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end

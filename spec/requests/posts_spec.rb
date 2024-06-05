@@ -1,19 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe 'Posts', type: :request do
-  let(:user) { create(:user) }
-
-  describe 'prevent access to unauthed users' do
+  context 'Prevent access when user' do
     let(:user) { create(:user) }
-
     let(:post) { create(:post) }
 
-    it 'should not be successful' do
+    it 'not signed_in' do
       get posts_path
       expect(response).not_to be_successful
     end
   end
-  context 'with user signed in ' do
+  context 'Prevent access when user signed in but' do
+    let(:user) { create(:user) }
+    let(:post) { create(:post) }
+    before { sign_in user }
+
+    it 'has not created a profile yet' do
+      get posts_path
+      expect(response).not_to be_successful
+    end
+  end
+  context 'all before_actions conditions are met ' do
     let(:user) { create(:user) }
     let(:my_post) { create(:post, user:) }
     before { sign_in user }
