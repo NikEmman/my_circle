@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe 'FollowRequests', type: :request do
   let(:user) { create(:user) }
   let(:profile) { create(:profile, user:) }
-  let(:follow_request) { create(:follow_request) }
-
+  let(:follow_request) { create(:follow_request, approver: user) }
   context 'Prevent access when user' do
     it 'not signed_in' do
       post profile_follow_requests_path(profile),
@@ -26,7 +25,7 @@ RSpec.describe 'FollowRequests', type: :request do
     describe 'Put /FollowRequest' do
       it 'should update a follow request with valid attributes' do
         put profile_follow_request_path(profile, follow_request),
-            params: { follow_request: FactoryBot.attributes_for(:follow_request) }
+            params: { follow_request: FactoryBot.attributes_for(:follow_request), status: 2 }
 
         expect(response).to redirect_to profile_path(profile)
         expect(flash[:notice]).to eq 'Follow request was successfully answered!'
