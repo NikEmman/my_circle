@@ -1,7 +1,9 @@
-<small><b><%if comment.user.profile%>
-      <%= link_to "#{comment.user.profile.full_name}"%> :</b></small>
-<%else%>
-  <b>Anonymous:</b>
+<small><b>
+    <%if comment.user.profile && comment.user.profile.persisted?%>
+      <%= link_to "#{comment.user.profile.full_name}"%> :
+    <%else%>
+      Anonymous:
+    </b></small>
 <%end%>
 <small>
   <p><%= time_ago_in_words(comment.created_at) %></p>
