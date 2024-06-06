@@ -1,6 +1,6 @@
 <small>
   <%if comment.user.profile && comment.user.profile.persisted?%>
-    <%= link_to "#{comment.user.profile.full_name}"%> :
+    <%= link_to "#{comment.user.profile.full_name}",profile_path(comment.user.profile)%> :
   <%else%>
     Anonymous:
   <%end%>

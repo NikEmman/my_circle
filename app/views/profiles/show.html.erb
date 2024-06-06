@@ -9,15 +9,15 @@
     Anonymoys profile
   <%end%>
 </h1>
-<div><%=link_to "Edit profile", edit_profile_path(@profile)%></div>
+<div><%=link_to "Edit profile", edit_profile_path(@profile) if current_user == @profile.user%></div>
 <%if FolloweesFollower.exists?(follower_id: current_user.id, followee_id: @profile.user.id)%>
   <%= button_to 'Unfollow', followees_follower_path(follower_id: current_user.id, followee_id: @profile.user.id), method: :delete %>
 <%end%>
-<%if current_user.id == @profile.user.id && current_user.pending_requests.pending%>
+<%if current_user == @profile.user && current_user.pending_requests.pending.any?%>
   <ul>You have friend requests by: 
     <%current_user.pending_requests.pending.each do |request|%>
       <li>
-        <%="#{request.requester.profile.first_name} #{request.requester.profile.last_name}"%>
+        <%="#{request.requester.profile.full_name}"%>
         <%= render partial: "shared/accept_form", locals: { request: request } %>
         <%= render partial: "shared/reject_form", locals: { request: request } %>
       </li>
