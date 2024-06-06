@@ -8,7 +8,7 @@ class FollowRequestsController < ApplicationController
       if @follow_request.save
         format.html { redirect_to profile_path(params[:profile_id]), notice: 'Follow request was successfully sent!' }
       else
-        format.html { redirect_to profile_path(params[:profile_id]), status: :unprocessable_entity }
+        format.html { redirect_to root_path, status: :unprocessable_entity }
       end
     end
   end
@@ -27,7 +27,7 @@ class FollowRequestsController < ApplicationController
             redirect_to profile_path(params[:profile_id]), notice: 'Follow request was successfully answered!'
           end
         else
-          format.html { redirect_to profile_path(params[:profile_id]), status: :unprocessable_entity }
+          format.html { redirect_to root_path, status: :unprocessable_entity }
         end
       end
     end
