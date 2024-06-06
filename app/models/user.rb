@@ -17,4 +17,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  scope :not_followed_by, lambda { |user|
+                            where.not(id: user.followees.pluck(:id) + [user.id]).joins(:profile)
+                          }
 end
