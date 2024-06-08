@@ -9,15 +9,15 @@
   <div>
     <span><%=comment.likers.count%></span>
     <% if LikerLikedComment.exists?(liker_id: current_user.id, liked_comment_id: comment.id) %>
-      <%= button_to 'Unlike', post_comment_liker_liked_comment_path(comment_id: comment.id,post_id: comment.post.id, id: LikerLikedComment.find_by(liker_id: current_user.id, liked_comment_id: comment.id).id), method: :delete %>
+      <%= button_to '-♡', post_comment_liker_liked_comment_path(comment_id: comment.id,post_id: comment.post.id, id: LikerLikedComment.find_by(liker_id: current_user.id, liked_comment_id: comment.id).id), method: :delete %>
     <% else %>
       <%= form_with model: [comment, LikerLikedComment.new], url: post_comment_liker_liked_comments_path(post_id: comment.post.id, comment_id: comment.id), local: true do |form| %>
-        <%= form.submit "Like" %>
+        <%= form.submit "♡" %>
       <% end %>
     <% end %>
     <%if current_user == comment.user%>
-      <%= link_to "Edit comment", edit_post_comment_path(id:comment.id, post_id: comment.post.id) %>
-      <%= button_to "Delete Comment", post_comment_path(id:comment.id, post_id: comment.post.id), method: :delete%>
+      <%= link_to "✍", edit_post_comment_path(id:comment.id, post_id: comment.post.id) %>
+      <%= button_to "␡", post_comment_path(id:comment.id, post_id: comment.post.id), method: :delete%>
     <%end%>
   </div>
 </small>

@@ -14,16 +14,16 @@
   <div>
     <span><%=post.likers.count%></span>
     <% if LikerLikedPost.exists?(liker_id: current_user.id, liked_post_id: post.id) %>
-      <%= button_to 'Unlike', post_liker_liked_post_path(post_id: post.id, id: LikerLikedPost.find_by(liker_id: current_user.id, liked_post_id: post.id).id), method: :delete %>
+      <%= button_to '-♡', post_liker_liked_post_path(post_id: post.id, id: LikerLikedPost.find_by(liker_id: current_user.id, liked_post_id: post.id).id), method: :delete %>
     <% else %>
       <%= form_with model: [post, LikerLikedPost.new], local: true do |form| %>
-        <%= form.submit "Like" %>
+        <%= form.submit "♡" %>
       <% end %>
     <% end %>
     <br>
     <%if current_user == post.user%>
-      <%= link_to "Edit Post", edit_post_path(post) %>
-      <%= button_to "Delete Post", post, method: :delete%>
+      <%= link_to "✍", edit_post_path(post) %>
+      <%= button_to "␡", post, method: :delete%>
     <%end%>
   </div>
   <small><%=post.comments.count %> <b>Comments</b></small>
