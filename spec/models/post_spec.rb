@@ -15,6 +15,10 @@ RSpec.describe Post, type: :model do
       post.body = nil
       expect(post).not_to be_valid
     end
+    it 'is invalid with a body of >500 chars' do
+      post.body = 'a' * 501
+      expect(post).not_to be_valid
+    end
   end
 
   context 'associations' do

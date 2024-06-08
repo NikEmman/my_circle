@@ -13,6 +13,10 @@ RSpec.describe Comment, type: :model do
       comment.body = nil
       expect(comment).not_to be_valid
     end
+    it 'is invalid with a body of >500 chars' do
+      comment.body = 'a' * 501
+      expect(comment).not_to be_valid
+    end
   end
 
   context 'associations' do

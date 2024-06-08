@@ -1,9 +1,8 @@
-<%= form_with(model: model, local: true) do |form| %>
-  <div>
+<div data-controller = "char-limiter" >
+  <%= form_with(model: model, local: true)  do |form| %>
     <% model_name = model.class.name == "Post" ? "Post" : "Comment"%>
-    <%= form.text_area :body %>
-  </div>
-  <div>
-    <%= form.submit "#{model_name}"%>
-  </div>
-<% end %>
+    <%= form.text_area :body, data: { char_limiter_target: "input", action: "input->char-limiter#checkInput" } %>
+    <div data-char-limiter-target="warning" style="color: red;"></div>
+    <%= form.submit "#{model_name}", data: { char_limiter_target: "submit" } %>
+  <% end %>
+</div>
