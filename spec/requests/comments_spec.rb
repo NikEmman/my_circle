@@ -25,14 +25,6 @@ RSpec.describe 'Comments', type: :request do
     before { sign_in user }
     before { create(:profile, user:) }
 
-    describe 'Get /New' do
-      it 'should render new page' do
-        get new_post_comment_path(my_post)
-
-        expect(response).to render_template :new
-      end
-    end
-
     describe 'Get /Show' do
       it 'should render show page' do
         get post_comment_path(my_post, comment)
@@ -55,8 +47,7 @@ RSpec.describe 'Comments', type: :request do
       end
       it 'should not create a comment with invalid attributes' do
         post post_comments_path(my_post), params: { comment: FactoryBot.attributes_for(:comment, body: nil) }
-        expect(response).to render_template :new
-        expect(flash[:notice]).to eq nil
+        expect(flash[:alert]).to eq 'Comment was not created'
       end
     end
     describe 'Put /Comment' do

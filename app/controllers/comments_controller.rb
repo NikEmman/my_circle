@@ -35,7 +35,7 @@ class CommentsController < ApplicationController
 
           ]
         end
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { flash.now[:alert] = 'Comment was not created' }
       end
     end
   end

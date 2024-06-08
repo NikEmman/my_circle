@@ -39,7 +39,7 @@ class PostsController < ApplicationController
 
           ]
         end
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { flash.now[:alert] = 'Post was not created' }
       end
     end
   end

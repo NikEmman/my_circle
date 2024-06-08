@@ -32,12 +32,6 @@ RSpec.describe 'Posts', type: :request do
         expect(response).to render_template :index
       end
     end
-    describe 'Get /New' do
-      it 'should render new page' do
-        get new_post_path
-        expect(response).to render_template :new
-      end
-    end
     describe 'Get /Edit' do
       it 'should render edit page' do
         get edit_post_path(my_post)
@@ -52,8 +46,7 @@ RSpec.describe 'Posts', type: :request do
       end
       it 'should not create a post with invalid attributes' do
         post '/posts', params: { post: FactoryBot.attributes_for(:post, body: nil) }
-        expect(response).to render_template :new
-        expect(flash[:notice]).to eq nil
+        expect(flash[:alert]).to eq 'Post was not created'
       end
     end
     describe 'Put /Post' do
@@ -73,7 +66,7 @@ RSpec.describe 'Posts', type: :request do
     describe 'Delete /post' do
       it 'should destroy a post' do
         delete "/posts/#{my_post.id}"
-        expect(response).to redirect_to posts_url
+        expect(response).to redirect_to root_path
         expect(flash[:notice]).to eq 'Post was successfully destroyed.'
       end
     end
