@@ -1,4 +1,4 @@
-<%= form_with(model: request, url: profile_follow_request_path(@profile), local: true) do |f| %>
+<%= form_with(model: request, url: profile_follow_request_path(@profile,request), local: true) do |f| %>
   <%= f.hidden_field :status, value: 1 %>
   <%= f.submit "Accept" %>
 <% end %>

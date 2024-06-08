@@ -28,10 +28,15 @@
   </div>
   <small><%=post.comments.count %> <b>Comments</b></small>
   <br>
-  <% post.comments.each do |comment|%>
-    <%= render partial: "shared/comment", locals: { comment: comment } %>
-  <%end%>
-  <%= link_to "Comment", new_post_comment_path(post)%>
+  <div id="comments">
+    <% post.comments.each do |comment|%>
+      <%= render partial: "shared/comment", locals: { comment: comment } %>
+    <%end%>
+  </div>
+  <div id="new_comment">
+    <%= render partial: "shared/form", locals: { model: [post, Comment.new] } %>
+  </div>
+  <%#= link_to "Comment", new_post_comment_path(post)%>
 </div>
 <br>
 <br>

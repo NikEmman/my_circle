@@ -14,7 +14,7 @@ class FollowRequestsController < ApplicationController
   end
 
   def update
-    @follow_request = FollowRequest.find_by(approver_id: current_user.id)
+    @follow_request = FollowRequest.find(params[:id])
 
     respond_to do |format|
       ActiveRecord::Base.transaction do

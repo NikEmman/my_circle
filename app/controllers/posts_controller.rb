@@ -18,8 +18,27 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.update('new_post',
+                                partial: 'shared/form',
+                                locals: { model: Post.new }),
+            turbo_stream.prepend('posts',
+                                 partial: 'shared/post',
+                                 locals: { post: @post })
+
+          ]
+        end
         format.html { redirect_to root_path, notice: 'Post was successfully created.' }
       else
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.update('new_post',
+                                partial: 'shared/form',
+                                locals: { model: @post })
+
+          ]
+        end
         format.html { render :new, status: :unprocessable_entity }
       end
     end

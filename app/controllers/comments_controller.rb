@@ -14,8 +14,27 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.update('new_comment',
+                                partial: 'shared/form',
+                                locals: { model: [@post, Comment.new] }),
+            turbo_stream.prepend('comments',
+                                 partial: 'shared/comment',
+                                 locals: { comment: @comment })
+
+          ]
+        end
         format.html { redirect_to @post, notice: 'Comment was successfully created.' }
       else
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.update('new_comment',
+                                partial: 'shared/form',
+                                locals: { model: [@post, @comment] })
+
+          ]
+        end
         format.html { render :new, status: :unprocessable_entity }
       end
     end
