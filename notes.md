@@ -1,6 +1,6 @@
-# Add stimulus controller
+# Add stimulus controller for like?
 
-To properly show the char limitation on a new post/comment
+to like and remove like without reloading page
 
 # style me up baby!
 

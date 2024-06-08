@@ -7,10 +7,9 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <!--    <link rel='stylesheet' href='https://cdn.simplecss.org/simple-v1.css'>
--->    <%= javascript_importmap_tags %>
+    <%= javascript_importmap_tags %>
   </head>
-  <body>
+  <body class="bg-slate-900 text-slate-300">
     <%= render partial: "shared/navbar"%>
     <div class="container">
       <p class= "notice"><%= notice %></p>

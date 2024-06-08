@@ -1,8 +1,7 @@
-<header>
-  <ul>
-    <li><%= link_to(image_tag("circle-xl.jpeg", style:"width:60px;") + content_tag(:span, "Home"), root_path, class:"text-red-500") %></li>
+<header class="flex justify-between p-6 bg-gray-200">
+  <div><%= link_to(image_tag("circle-xl.jpeg", class:"rounded-full w-14") + content_tag(:span, "Home", class:"text-red-500 text-2xl"), root_path, class:" flex items-center text-red-500 text-xl") %></div>
+  <ul class="flex gap-3 items-center">
     <% if user_signed_in? %>
-      <li><%=link_to "New Post", new_post_path%></li>
       <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
       <%if current_user.profile && current_user.profile.persisted?%>
         <li>
