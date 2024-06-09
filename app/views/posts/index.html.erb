@@ -1,17 +1,19 @@
-<div id="new_post"><%= render partial: "shared/form", locals: { model: Post.new } %></div>
-<%if current_user.profile%>
-  <div id="posts">
-    <% @posts.each do |post|%>
-      <%= render partial: "shared/post", locals: { post: post } %>
-    <%end%>
-  </div>
-  <div>
-    <ul>Find people to follow:</ul>
-    <% User.not_followed_by(current_user).each do |user|%>
-      <li><%= link_to "#{user.profile.first_name} #{user.profile.last_name}", profile_url(user.profile) %></li>
-    <%end%>
-  </div>
-<% else%>
-  <h1>Welcome to My Circle&trade;!</h1>
-  <p><%=link_to "Create a Profile", new_profile_path%> to get started!</p>
-<%end%>
+<div class="grid">
+  <div id="new_post"><%= render partial: "shared/form", locals: { model: Post.new } %></div>
+  <%if current_user.profile%>
+    <div id="posts">
+      <% @posts.each do |post|%>
+        <%= render partial: "shared/post", locals: { post: post } %>
+      <%end%>
+    </div>
+    <div>
+      <ul>Find people to follow:</ul>
+      <% User.not_followed_by(current_user).each do |user|%>
+        <li><%= link_to "#{user.profile.first_name} #{user.profile.last_name}", profile_url(user.profile) %></li>
+      <%end%>
+    </div>
+  <% else%>
+    <h1>Welcome to My Circle&trade;!</h1>
+    <p><%=link_to "Create a Profile", new_profile_path%> to get started!</p>
+  <%end%>
+</div>

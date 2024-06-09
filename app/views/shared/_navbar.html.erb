@@ -1,17 +1,17 @@
-<header class="flex justify-between p-6 bg-gray-200">
-  <div><%= link_to(image_tag("circle-xl.jpeg", class:"rounded-full w-14") + content_tag(:span, "Home", class:"text-red-500 text-2xl"), root_path, class:" flex items-center text-red-500 text-xl") %></div>
-  <ul class="flex gap-3 items-center">
+<header class="sticky top-0 z-40 p-6 w-full flex justify-between backdrop-blur">
+  <div class="hover:text-teal-700 text-teal-500 text-3xl"><%= link_to(image_tag("circle-xl.jpeg", class:"rounded-full w-14") + content_tag(:span, "My Circle", class:"hover:text-teal-700 text-3xl text-teal-500"), root_path, class: "flex gap-1 items-center") %></div>
+  <ul class="flex gap-4 items-center">
     <% if user_signed_in? %>
-      <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+      <li class ="text-teal-500 text-3xl hover:text-teal-700"><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
       <%if current_user.profile && current_user.profile.persisted?%>
-        <li>
+        <li class ="text-teal-500 text-3xl hover:text-teal-700">
           <%=link_to 'My profile', profile_url(current_user.profile)%></li>
       <%else%>
-        <li><%=link_to "Create Profile", new_profile_path%></li>
+        <li class ="text-teal-500 text-3xl hover:text-teal-700"><%=link_to "Create Profile", new_profile_path%></li>
       <%end%>
     <% else %>
-      <li><%= link_to "Sign in",new_user_session_path%></li>
-      <li><%= link_to 'Sign up', new_user_registration_path %></li>
+      <li class ="text-teal-400 text-3xl hover:text-teal-700"><%= link_to "Sign in", new_user_session_path%></li>
+      <li><%= link_to 'Sign up', new_user_registration_path, class:" text-teal-400 text-3xl hover:text-teal-700" %></li>
     <% end %>
   </ul>
 </header>

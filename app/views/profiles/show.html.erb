@@ -1,10 +1,10 @@
 <%if @profile.avatar.attached?%>
-  <div><%= image_tag @profile.avatar, width: "200px"%></div>
+  <%= image_tag @profile.avatar, class:"size-35 rounded-full shadow-lg"%>
 <%else%>
-  <div style="width:100px;"><img src="<%= image_path('default.jpg') %>" alt="default profile picture"></div>
+  <img src="<%= image_path('default.jpg') %>" alt="default profile picture", class = "size-25 rounded-full shadow-lg">
 <%end%>
-<h1><%if @profile.first_name%>
-    <%=@profile.first_name.capitalize%>'s profile
+<h1><%if @profile.full_name%>
+    <%=@profile.full_name%>'s profile
   <%else%>
     Anonymoys profile
   <%end%>

@@ -22,8 +22,8 @@
     <% end %>
     <br>
     <%if current_user == post.user%>
-      <%= link_to "✍", edit_post_path(post) %>
-      <%= button_to "␡", post, method: :delete%>
+      <%= link_to "✎", edit_post_path(post) %>
+      <%= button_to "del", post, method: :delete%>
     <%end%>
   </div>
   <small><%=post.comments.count %> <b>Comments</b></small>
