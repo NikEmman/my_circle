@@ -1,24 +1,25 @@
-<small>
+<small class="border-t-2 border-slate-300">
   <%if comment.user.profile && comment.user.profile.persisted?%>
     <%= link_to "#{comment.user.profile.full_name}",profile_path(comment.user.profile)%> :
   <%else%>
     Anonymous:
   <%end%>
-  <p><%= time_ago_in_words(comment.created_at) %></p>
-  <p><%=simple_format(comment.body)%></p>
-  <div>
-    <span><%=comment.likers.count%></span>
-    <% if LikerLikedComment.exists?(liker_id: current_user.id, liked_comment_id: comment.id) %>
-      <%= button_to '-♡', post_comment_liker_liked_comment_path(comment_id: comment.id,post_id: comment.post.id, id: LikerLikedComment.find_by(liker_id: current_user.id, liked_comment_id: comment.id).id), method: :delete %>
-    <% else %>
-      <%= form_with model: [comment, LikerLikedComment.new], url: post_comment_liker_liked_comments_path(post_id: comment.post.id, comment_id: comment.id), local: true do |form| %>
-        <%= form.submit "♡" %>
+  <%= time_ago_in_words(comment.created_at) %>
+  <article><%=simple_format(comment.body)%></article>
+  <div class = "flex gap-2">
+    <div class= "flex gap-1 items-center">
+      <%=comment.likers.count%>
+      <% if LikerLikedComment.exists?(liker_id: current_user.id, liked_comment_id: comment.id) %>
+        <%= button_to '-♡', post_comment_liker_liked_comment_path(comment_id: comment.id,post_id: comment.post.id, id: LikerLikedComment.find_by(liker_id: current_user.id, liked_comment_id: comment.id).id), method: :delete, class:"size-8 rounded-full bg-slate-600 text-xl text-teal-400 hover:bg-slate-400  hover:text-teal-700" %>
+      <% else %>
+        <%= form_with model: LikerLikedComment.new, url: post_comment_liker_liked_comments_path(post_id: comment.post.id, comment_id: comment.id), local: true do |form| %>
+          <%= form.submit "♡", class:"size-8 rounded-full bg-slate-600 text-xl text-teal-400 hover:bg-slate-400  hover:text-teal-700" %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
     <%if current_user == comment.user%>
-      <%= link_to "✍", edit_post_comment_path(id:comment.id, post_id: comment.post.id) %>
-      <%= button_to "␡", post_comment_path(id:comment.id, post_id: comment.post.id), method: :delete%>
+      <%= link_to "✎", edit_post_comment_path(id:comment.id, post_id: comment.post.id), class:"size-8 rounded-full bg-slate-600 text-xl text-teal-400 hover:bg-slate-400  hover:text-teal-700" %>
+      <%= button_to "X", post_comment_path(id:comment.id, post_id: comment.post.id), method: :delete , class:"size-8 rounded-full bg-slate-600 text-xl text-red-700 hover:bg-slate-400  hover:text-teal-700"%>
     <%end%>
   </div>
 </small>
-<hr>

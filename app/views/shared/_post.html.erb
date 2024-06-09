@@ -1,42 +1,51 @@
-<div>
-  <%if post.user.profile.avatar.attached?%>
-    <div><%= image_tag post.user.profile.avatar, width: "56px" %></div>
-  <%else%>
-    <div style="width:56px;"><img src="<%= image_path('default.jpg') %>" alt="default profile picture"></div>
-  <%end%>
-  <p><%= time_ago_in_words(post.created_at) %></p>
-  <div>
-    <b><%= link_to "#{post.user.profile.full_name}", profile_path(post.user.profile)%></b>
-    <span><%=link_to "wrote", post_path(post)%></span>
-    <br>
-    <div><%= simple_format(post.body)%></div>
+<div class ="border-2 rounded-md border-gray-600 p-4">
+  <div class="flex justify-between">
+    <div class="flex gap-2 items-center">
+      <%if post.user.profile.avatar.attached?%>
+        <%= image_tag post.user.profile.avatar, class: "w-11 rounded-full" %>
+      <%else%>
+        <img src="<%= image_path('default.jpg') %>" alt="default profile picture", class="w-11 rounded-full">
+      <%end%>
+      <div>
+        <b><%= link_to "#{post.user.profile.full_name}", profile_path(post.user.profile)%></b>
+        <span><%=link_to "wrote", post_path(post)%></span>
+      </div>
+    </div>
+    <p><%= time_ago_in_words(post.created_at) %> ago:</p>
   </div>
-  <div>
-    <span><%=post.likers.count%></span>
-    <% if LikerLikedPost.exists?(liker_id: current_user.id, liked_post_id: post.id) %>
-      <%= button_to '-♡', post_liker_liked_post_path(post_id: post.id, id: LikerLikedPost.find_by(liker_id: current_user.id, liked_post_id: post.id).id), method: :delete %>
-    <% else %>
-      <%= form_with model: [post, LikerLikedPost.new], local: true do |form| %>
-        <%= form.submit "♡" %>
-      <% end %>
-    <% end %>
-    <br>
-    <%if current_user == post.user%>
-      <%= link_to "✎", edit_post_path(post) %>
-      <%= button_to "del", post, method: :delete%>
-    <%end%>
+  <article class="p-2"><%= simple_format(post.body)%></article>
+  <div class = "flex gap-3 justify-between">
+    <div class=" flex gap-1 items-center">
+      <div class=" flex gap-1 items-center">
+        <%=post.likers.count%>
+        <% if LikerLikedPost.exists?(liker_id: current_user.id, liked_post_id: post.id) %>
+          <%= button_to '-♡', post_liker_liked_post_path(post_id: post.id, id: LikerLikedPost.find_by(liker_id: current_user.id, liked_post_id: post.id).id), method: :delete, class:"size-10 rounded-full bg-slate-600 text-2xl text-teal-400 hover:bg-slate-400  hover:text-teal-700" %>
+        <% else %>
+          <%= form_with model: [post, LikerLikedPost.new], local: true do |form| %>
+            <%= form.submit "♡" , class:"size-8 rounded-full bg-slate-600 text-xl text-teal-400 hover:bg-slate-400  hover:text-teal-700"%>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class = "flex gap-1">
+      <%if current_user == post.user%>
+        <%= link_to "✎", edit_post_path(post), class:"size-8 rounded-full bg-slate-600 text-xl text-teal-400 hover:bg-slate-400  hover:text-teal-700"%>
+        <%= button_to "X", post, method: :delete, class:"size-8 rounded-full bg-slate-600 text-xl text-red-700 hover:bg-slate-400  hover:text-teal-700"%>
+      <%end%>
+    </div>
   </div>
   <small><%=post.comments.count %> <b>Comments</b></small>
   <br>
-  <div id="comments">
-    <% post.comments.each do |comment|%>
-      <%= render partial: "shared/comment", locals: { comment: comment } %>
-    <%end%>
+  <div class= "flex flex-col gap-2">
+    <div id="comments">
+      <% post.comments.each do |comment|%>
+        <%= render partial: "shared/comment", locals: { comment: comment } %>
+      <%end%>
+    </div>
+    <div id="new_comment">
+      <%= render partial: "shared/form_comment", locals: { model: [post, Comment.new] } %>
+    </div>
   </div>
-  <div id="new_comment">
-    <%= render partial: "shared/form", locals: { model: [post, Comment.new] } %>
-  </div>
-  <%#= link_to "Comment", new_post_comment_path(post)%>
 </div>
 <br>
 <br>
