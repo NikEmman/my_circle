@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.update('new_comment',
-                                partial: 'shared/form',
+                                partial: 'shared/form_comment',
                                 locals: { model: [@post, Comment.new] }),
             turbo_stream.prepend('comments',
                                  partial: 'shared/comment',
@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.update('new_comment',
-                                partial: 'shared/form',
+                                partial: 'shared/form_comment',
                                 locals: { model: [@post, @comment] })
 
           ]

@@ -12,8 +12,12 @@
   <body class="bg-slate-900 text-teal-400">
     <%= render partial: "shared/navbar"%>
     <div class="container">
-      <p class= "notice"><%= notice %></p>
-      <p class= "alert"><%= alert %></p>
+      <% if notice.present? %>
+        <p class= "p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100"><%= notice %></p>
+      <% end %>
+      <% if alert.present? %>
+        <p class= "p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100"><%= alert %></p>
+      <% end %>
       <main class="container mx-auto mt-28 px-10 grid gap-3">
         <%= yield %>
       </main>

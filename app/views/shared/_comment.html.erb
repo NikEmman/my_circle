@@ -10,16 +10,16 @@
     <div class= "flex gap-1 items-center">
       <%=comment.likers.count%>
       <% if LikerLikedComment.exists?(liker_id: current_user.id, liked_comment_id: comment.id) %>
-        <%= button_to '-♡', post_comment_liker_liked_comment_path(comment_id: comment.id,post_id: comment.post.id, id: LikerLikedComment.find_by(liker_id: current_user.id, liked_comment_id: comment.id).id), method: :delete, class:"size-8 rounded-full bg-slate-600 text-xl text-teal-400 hover:bg-slate-400  hover:text-teal-700" %>
+        <%= button_to '-♡', post_comment_liker_liked_comment_path(comment_id: comment.id,post_id: comment.post.id, id: LikerLikedComment.find_by(liker_id: current_user.id, liked_comment_id: comment.id).id), method: :delete, class:"size-5 rounded-full bg-slate-600 text-md text-teal-400 hover:bg-slate-400  hover:text-teal-700" %>
       <% else %>
         <%= form_with model: LikerLikedComment.new, url: post_comment_liker_liked_comments_path(post_id: comment.post.id, comment_id: comment.id), local: true do |form| %>
-          <%= form.submit "♡", class:"size-8 rounded-full bg-slate-600 text-xl text-teal-400 hover:bg-slate-400  hover:text-teal-700" %>
+          <%= form.submit "♡", class:"size-5 rounded-full bg-slate-600 text-md text-teal-400 hover:bg-slate-400  hover:text-teal-700" %>
         <% end %>
       <% end %>
     </div>
     <%if current_user == comment.user%>
-      <%= link_to "✎", edit_post_comment_path(id:comment.id, post_id: comment.post.id), class:"size-8 rounded-full bg-slate-600 text-xl text-teal-400 hover:bg-slate-400  hover:text-teal-700" %>
-      <%= button_to "X", post_comment_path(id:comment.id, post_id: comment.post.id), method: :delete , class:"size-8 rounded-full bg-slate-600 text-xl text-red-700 hover:bg-slate-400  hover:text-teal-700"%>
+      <%= link_to "✎", edit_post_comment_path(id:comment.id, post_id: comment.post.id), class:"size-5 rounded-full bg-slate-600 text-md text-teal-400 hover:bg-slate-400  hover:text-teal-700" %>
+      <%= button_to "X", post_comment_path(id:comment.id, post_id: comment.post.id), method: :delete , class:"size-5 rounded-full bg-slate-600 text-md text-red-700 hover:bg-slate-400  hover:text-teal-700"%>
     <%end%>
   </div>
 </small>
