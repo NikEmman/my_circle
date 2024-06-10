@@ -1,5 +1,10 @@
 <header class="sticky top-0 z-40 p-6 w-full flex justify-between backdrop-blur">
-  <div class="hover:text-teal-700 text-teal-500 text-3xl"><%= link_to(image_tag("circle-xl.jpeg", class:"rounded-full w-14") + content_tag(:span, "My Circle", class:"hover:text-teal-700 text-3xl text-teal-500"), root_path, class: "flex gap-1 items-center") %></div>
+  <div class="hover:text-teal-700 text-teal-500 text-3xl">
+    <%= link_to root_path, class: "flex gap-1 items-center" do %>
+      <%= image_tag("circle-xl.jpeg", class:"rounded-full w-14") %>
+      <span class="hover:text-teal-700 text-3xl text-teal-500")> My Circle </span>
+    <% end %>
+  </div>
   <ul class="flex gap-4 items-center">
     <% if user_signed_in? %>
       <li class ="text-teal-500 text-3xl hover:text-teal-700"><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>

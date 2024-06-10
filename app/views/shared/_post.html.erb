@@ -1,5 +1,5 @@
-<div class ="border-2 rounded-md border-gray-600 p-4 grid grid-cols-2 grid-rows-3 gap-3">
-  <div class="col-span-2 row-span-2">
+<div class ="border-2 rounded-md border-gray-600 bg-slate-300 text-teal-800 p-4 grid grid-cols-2 grid-rows-2 gap-3">
+  <div class="col-span-2">
     <div class="flex justify-between">
       <div class="flex gap-2 items-center">
         <%if post.user.profile.avatar.attached?%>
@@ -36,18 +36,18 @@
       </div>
     </div>
   </div>
-  <div class = "row-start-3 col-start-2">
-    <small><%=post.comments.count %> <b>Comments</b></small>
+  <div class = "row-start-2 col-start-1 justify-center">
     <div class= "flex flex-col gap-2">
-      <div id="comments">
+      <small><%=post.comments.count %> <b>Comments</b></small>
+      <div id="comments" class=" max-h-48 overflow-auto">
         <% post.comments.each do |comment|%>
           <%= render partial: "shared/comment", locals: { comment: comment } %>
         <%end%>
       </div>
-      <div id="new_comment">
-        <%= render partial: "shared/form_comment", locals: { model: [post, Comment.new] } %>
-      </div>
     </div>
+  </div>
+  <div id="new_comment" class="row-start-2 col-start-2">
+    <%= render partial: "shared/form_comment", locals: { model: [post, Comment.new]}%>
   </div>
 </div>
 <br>

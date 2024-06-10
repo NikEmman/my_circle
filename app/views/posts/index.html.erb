@@ -15,7 +15,11 @@
   <div class= "col-span-1 max-h-60 overflow-auto">
     <ul class="pb-2 ">Find people to follow:</ul>
     <% User.not_followed_by(current_user).each do |user|%>
-      <li><%= link_to "#{user.profile.first_name} #{user.profile.last_name}", profile_url(user.profile) %></li>
+      <%= link_to profile_url(user.profile) do %>
+        <li class="hover:rounded-md hover:bg-slate-300 hover:text-teal-800 p-2">
+          <%= user.profile.full_name %>
+        </li>
+      <% end %>
     <%end%>
   </div>
 </div>
