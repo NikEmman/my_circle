@@ -1,6 +1,10 @@
 # Add stimulus controller for like?
 
-to like and remove like without reloading page
+to like and remove like without reloading 
+
+# Fix turbo-stream for comments
+
+It works for top post but not for the rest
 
 # style me up baby!
 
