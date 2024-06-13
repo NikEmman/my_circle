@@ -73,6 +73,7 @@ group :test do
   gem 'selenium-webdriver'
 end
 
+gem 'aws-sdk-s3', require: false
 gem 'devise', '~> 4.9'
 
 gem 'pg', '~> 1.5'
