@@ -77,3 +77,5 @@ gem 'aws-sdk-s3', require: false
 gem 'devise', '~> 4.9'
 
 gem 'pg', '~> 1.5'
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
