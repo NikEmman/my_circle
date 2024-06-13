@@ -18,7 +18,7 @@ Rails.application.configure do
 
   # Ensures that a master key has been made available in ENV["RAILS_MASTER_KEY"], config/master.key, or an environment
   # key such as config/credentials/production.key. This key is used to decrypt credentials (and other encrypted files).
-  config.require_master_key = true
+  config.require_master_key = false
 
   # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
   # config.public_file_server.enabled = false
@@ -72,7 +72,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "my_circle_production"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'my-app.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'https://my-circle.fly.dev/' }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings =
@@ -82,8 +82,8 @@ Rails.application.configure do
       port: 587,
       domain: 'gmail.com', # you can also use google.com
       authentication: :plain,
-      user_name: Rails.application.credentials.gmail.user_name,
-      password: Rails.application.credentials.gmail.password
+      user_name: Rails.application.credentials.dig(:gmail, :user_name),
+      password: Rails.application.credentials.dig(:gmail, :password)
     }
 
   # Ignore bad email addresses and do not raise email delivery errors.
