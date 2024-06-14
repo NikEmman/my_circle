@@ -14,7 +14,7 @@
       </div>
       <p><%= time_ago_in_words(post.created_at) %> ago:</p>
     </div>
-    <article class="p-2"><%= simple_format(post.body)%></article>
+    <article class="p-2 whitespace-normal overflow-auto"><%= simple_format(post.body)%></article>
     <div class = "flex gap-3 justify-between">
       <div class=" flex gap-1 items-center">
         <div class=" flex gap-1 items-center">
