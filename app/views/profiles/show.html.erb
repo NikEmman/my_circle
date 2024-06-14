@@ -12,7 +12,7 @@
     Anonymoys profile
   <%end%>
 </h1>
-<div><%=link_to "Edit profile", edit_profile_path(@profile), class:"rounded-xl bg-slate-600 p-2 text-teal-400 hover:bg-slate-400 hover:text-teal-700" if current_user == @profile.user%></div>
+<div><%=link_to "Edit profile", edit_profile_path(@profile), class:"bg-blue-400 w-48 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full" if current_user == @profile.user%></div>
 <%if FolloweesFollower.exists?(follower_id: current_user.id, followee_id: @profile.user.id)%>
   <%= button_to 'Unfollow', followees_follower_path(follower_id: current_user.id, followee_id: @profile.user.id), method: :delete, class:"rounded-xl bg-slate-600 p-2 text-teal-400 hover:bg-slate-400 hover:text-teal-700" %>
 <%end%>
@@ -43,4 +43,4 @@
     <%= render partial: "shared/post", locals: { post: post } %>
   <%end%>
 </div>
-<%= link_to "Home", root_path, class:"rounded-xl bg-slate-600 p-2 w-fit text-teal-400 hover:bg-slate-400 hover:text-teal-700"%>
+<%= link_to "Home", root_path, class:"bg-blue-400 w-48 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full"%>

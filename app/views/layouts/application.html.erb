@@ -9,19 +9,20 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body class="bg-slate-900 text-teal-400">
-    <%= render partial: "shared/navbar"%>
-    <div class="container">
-      <div class="flex justify-center w-screen">
-        <% if notice.present? %>
-          <p class= "p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 w-3/4 text-center"><%= notice %></p>
-        <% end %>
-        <% if alert.present? %>
-          <p class= "p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100 w-3/4 text-center"><%= alert %></p>
-        <% end %>
-      </div>
-      <main class="container mx-auto mt-28 px-10 grid gap-3">
+  <body class= "bg-sky-800 text-gray-400 w-screen">
+    <div class="flex min-h-screen">
+      <%= render partial: "shared/navbar"%>
+      <main class="container flex-1 border-slate-400 border-l-2">
+        <div class="flex justify-center w-full">
+          <% if notice.present? %>
+            <p class= "p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 w-3/4 text-center"><%= notice %></p>
+          <% end %>
+          <% if alert.present? %>
+            <p class= "p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100 w-3/4 text-center"><%= alert %></p>
+          <% end %>
+        </div>
         <%= yield %>
       </main>
-    </body>
-  </html>
+    </div>
+  </body>
+</html>
