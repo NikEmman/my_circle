@@ -3,9 +3,9 @@
     <div class="flex py-4 gap-4">
       <div class="">
         <%if current_user.profile.avatar.attached?%>
-          <%= image_tag current_user.profile.avatar, class: "w-11 rounded-full" %>
+          <%= image_tag current_user.profile.avatar, class: "inline-block h-10 w-10 rounded-full" %>
         <%else%>
-          <img src="<%= image_path('default.jpg') %>" alt="default profile picture", class="w-11 rounded-full">
+          <img src="<%= image_path('default.jpg') %>" alt="default profile picture", class="inline-block h-10 w-10 rounded-full">
         <%end%>
       </div>
       <div id="new_post" class ="flex flex-col  w-full gap-2">

@@ -1,35 +1,33 @@
-<div class= "max-w-sm rounded-lg flex-2 bg-sky-800 overflow-auto max-h-full shadow-lg m-4">
-  <div class="flex">
+<div class= "max-w-sm flex-2 bg-sky-800 overflow-auto max-h-full border-l  border-slate-400">
+  <div class="flex pt-4">
     <div class="flex-1 m-2">
       <h2 class="px-4 py-2 text-xl w-48 font-semibold text-white">Who to follow</h2>
     </div>
   </div>
-  <% User.not_followed_by(current_user).each do |user|%>
-    <div class="flex flex-shrink-0">
-      <div class="flex-1 ">
-        <div class="flex items-center w-48 px-2 py-2 text-base leading-6 font-semibold rounded-full hover:bg-sky-700 hover:text-slate-300">
-          <div>
-            <%if user.profile.avatar.attached?%>
-              <%= image_tag user.profile.avatar, class:"inline-block h-10 w-auto rounded-full ml-4 mt-2"%>
-            <%else%>
-              <img src="<%= image_path('default.jpg') %>" alt="default profile picture", class = "inline-block h-10 w-auto rounded-full ml-4 mt-2">
-            <%end%>
-          </div>
-          <div class="ml-3 mt-3">
-            <%= link_to profile_url(user.profile) do %>
-              <%= user.profile.full_name %>
-            <% end %>
+  <% User.not_followed_by(current_user).each do |user| %>
+    <% unless FollowRequest.exists?(requester_id: current_user.id, approver_id: user.id) %>
+      <div class="flex flex-shrink-0">
+        <div class="flex-1 ">
+          <div class="flex items-center w-48 px-2 py-2 text-base leading-6 font-semibold rounded-full hover:bg-sky-700 hover:text-slate-300">
+            <div>
+              <%if user.profile.avatar.attached?%>
+                <%= image_tag user.profile.avatar, class:"inline-block h-10 w-auto rounded-full ml-4 mt-2"%>
+              <%else%>
+                <img src="<%= image_path('default.jpg') %>" alt="default profile picture", class = "inline-block h-10 w-auto rounded-full ml-4 mt-2">
+              <%end%>
+            </div>
+            <div class="ml-3 mt-3">
+              <%= link_to profile_url(user.profile) do %>
+                <%= user.profile.full_name %>
+              <% end %>
+            </div>
           </div>
         </div>
+        <div class="flex-1 px-4 py-2 m-2">
+          <%= render partial: "shared/request_form", locals: { follow_request: FollowRequest.new, profile: user.profile } %>
+        </div>
       </div>
-      <div class="flex-1 px-4 py-2 m-2">
-        <a href="" class=" float-right">
-          <button class="bg-transparent text-white font-semibold hover:text-white py-2 px-4 border border-white rounded-full hover:border-transparent  hover:bg-blue-500">
-            Follow
-          </button>
-        </a>
-      </div>
-    </div>
-    <hr class="border-gray-600">
-  <%end%>
+      <hr class="border-slate-400">
+    <% end %>
+  <% end %>
 </div>

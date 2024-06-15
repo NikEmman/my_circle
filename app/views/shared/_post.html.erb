@@ -1,54 +1,62 @@
-<div class ="border-2 rounded-md border-gray-600 bg-slate-300 text-teal-800 p-4 grid grid-cols-2 grid-rows-2 gap-3">
-  <div class="col-span-2 flex flex-col justify-between p-1 border-solid border-b-2 border-slate-900">
-    <div class="flex justify-between">
-      <div class="flex gap-2 items-center">
+<div class="flex flex-shrink-0 text-white justify-between p-4 pb-0">
+  <%= link_to profile_path(post.user.profile), class:"flex-shrink-0 group block" do %>
+    <div class="flex items-center">
+      <div>
         <%if post.user.profile.avatar.attached?%>
-          <%= image_tag post.user.profile.avatar, class: "w-11 rounded-full" %>
+          <%= image_tag post.user.profile.avatar, class: "inline-block h-10 w-10 rounded-full" %>
         <%else%>
-          <img src="<%= image_path('default.jpg') %>" alt="default profile picture", class="w-11 rounded-full">
+          <img src="<%= image_path('default.jpg') %>" alt="default profile picture", class="inline-block h-10 w-10 rounded-full">
         <%end%>
-        <div>
-          <b><%= link_to "#{post.user.profile.full_name}", profile_path(post.user.profile)%></b>
-          <span><%=link_to "wrote", post_path(post)%></span>
-        </div>
       </div>
-      <p><%= time_ago_in_words(post.created_at) %> ago:</p>
+      <div class="ml-3">
+        <p class="text-base leading-6 font-medium text-white">
+          <%= "#{post.user.profile.full_name}"%>
+        </p>
+      </div>
     </div>
-    <article class="p-2 whitespace-normal overflow-auto"><%= simple_format(post.body)%></article>
-    <div class = "flex gap-3 justify-between">
-      <div class=" flex gap-1 items-center">
-        <div class=" flex gap-1 items-center">
-          <%=post.likers.count%> like(s)
-          <% if LikerLikedPost.exists?(liker_id: current_user.id, liked_post_id: post.id) %>
-            <%= button_to '-♡', post_liker_liked_post_path(post_id: post.id, id: LikerLikedPost.find_by(liker_id: current_user.id, liked_post_id: post.id).id), method: :delete, class:"size-10 rounded-full bg-slate-600 text-2xl text-teal-400 hover:bg-slate-400  hover:text-teal-700" %>
-          <% else %>
-            <%= form_with model: [post, LikerLikedPost.new], local: true do |form| %>
-              <%= form.submit "♡" , class:"size-8 rounded-full bg-slate-600 text-xl text-teal-400 hover:bg-slate-400  hover:text-teal-700"%>
-            <% end %>
+  <%end%>
+  <p><%= time_ago_in_words(post.created_at) %> ago:</p>
+</div>
+<div class="pl-16">
+  <p class="width-full font-medium text-white flex-shrink max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">
+    <%= "#{post.body}" %>
+  </p>
+  <div class="flex items-center">
+    <div class="flex  grow items-center gap-1 w-fit">
+      <div class="flex items-center gap-1">
+        <p><%=post.likers.count%> like(s)</p>
+        <% if LikerLikedPost.exists?(liker_id: current_user.id, liked_post_id: post.id) %>
+          <%= button_to '-♡', post_liker_liked_post_path(post_id: post.id, id: LikerLikedPost.find_by(liker_id: current_user.id, liked_post_id: post.id).id), method: :delete, class:"w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-sky-700 hover:text-blue-300" %>
+        <% else %>
+          <%= form_with model: [post, LikerLikedPost.new], local: true do |form| %>
+            <%= form.submit "♡" , class:"w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-sky-700 hover:text-blue-300"%>
           <% end %>
+        <% end %>
+      </div>
+      <%if current_user == post.user%>
+        <div class="flex-1 text-center py-2 m-2">
+          <%= link_to "edit", edit_post_path(post), class:"w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-sky-700 hover:text-blue-300"%>
         </div>
-      </div>
-      <div class = "flex gap-1">
-        <%if current_user == post.user%>
-          <%= link_to "✎", edit_post_path(post), class:"size-8 rounded-full bg-slate-600 text-xl text-teal-400 hover:bg-slate-400  hover:text-teal-700"%>
-          <%= button_to "X", post, method: :delete, class:"size-8 rounded-full bg-slate-600 text-xl text-red-700 hover:bg-slate-400  hover:text-teal-700"%>
+        <div class="flex-1 text-center py-2 m-2">
+          <%= button_to "del", post, method: :delete, class:"w-12 mt-1 text-center group flex items-center text-semibold text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-sky-700 hover:text-blue-300"%>
+        </div>
+      <%end%>
+      <div class="flex-1 text-center">
+        <%= link_to post_path(post), class:"w-12 mt-1 group flex items-center text-gray-500 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300" do %>
+          <svg class="text-center h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+            </path>
+          </svg>
         <%end%>
       </div>
     </div>
-  </div>
-  <div class = "row-start-2 col-start-1 justify-center">
-    <div class= "flex flex-col gap-2">
-      <small><%=post.comments.count %> <b>Comments</b></small>
-      <div id="comments" class=" max-h-48 overflow-auto">
-        <% post.comments.each do |comment|%>
-          <%= render partial: "shared/comment", locals: { comment: comment } %>
-        <%end%>
+    <div class="flex items-center">
+      <div class="text-center w-fit py-2 m-2">
+        <%="#{post.comments.count} Comments"%>
       </div>
     </div>
-  </div>
-  <div id="new_comment" class="row-start-2 col-start-2">
-    <%= render partial: "shared/form_comment", locals: { model: [post, Comment.new]}%>
   </div>
 </div>
-<br>
-<br>
+<hr class="border-slate-400">

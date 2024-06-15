@@ -6,7 +6,6 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @follow_request = FollowRequest.new
   end
 
   def edit; end

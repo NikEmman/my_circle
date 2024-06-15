@@ -19,12 +19,12 @@
   <%end%>
 </div>
 <%if current_user == @profile.user && current_user.pending_requests.pending.any?%>
-  <div class ="flex flex-col gap-1 p-4">
+  <div class ="flex flex-col gap-4 p-4">
     <p class="text-white">You have friend requests by:</p>
     <ul class = "grid grid-flow-col auto-rows-max md:auto-rows-min">
       <%current_user.pending_requests.pending.each do |request|%>
-        <li class ="border-2 rounded-md flex flex-col p-2 gap-2 size-fit text-center  text-white">
-          <p class="text-semibold hover:bg-sky-700 hover:text-slate-200 rounded-full"><%=link_to "#{request.requester.profile.full_name}", profile_path(request.requester.profile)%></p>
+        <li class ="border-2 rounded-full flex p-2 gap-2 size-fit items-center text-white">
+          <p class="text-semibold hover:bg-sky-700 p-2 hover:text-slate-200 rounded-full"><%=link_to "#{request.requester.profile.full_name}", profile_path(request.requester.profile)%></p>
           <div class = "flex gap-2">
             <div><%= render partial: "shared/accept_form", locals: { request: request } %></div>
             <div><%= render partial: "shared/reject_form", locals: { request: request } %></div>
@@ -36,7 +36,7 @@
 <%end%>
 <div>
   <%unless current_user.id == @profile.user.id || FollowRequest.exists?(requester_id: current_user.id, approver_id: @profile.user.id) %>
-    <%= render partial: "shared/request_form", locals: { follow_request_form: @follow_request } %>
+    <%= render partial: "shared/request_form", locals: { follow_request: FollowRequest.new, profile: @profile } %>
   <%end%>
 </div>
 <div class="p-4">
