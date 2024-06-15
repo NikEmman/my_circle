@@ -5,24 +5,26 @@
     <img src="<%= image_path('default.jpg') %>" alt="default profile picture", class = "w-32 rounded-full shadow-lg">
   <%end%>
 </div>
-<h1 class = "text-center text-4xl border-b-2 border-slate-200">
+<h1 class = "text-center text-4xl text-white font-semibold border-b-2 border-slate-200">
   <%if @profile.full_name%>
     <%=@profile.full_name%>'s profile
   <%else%>
     Anonymoys profile
   <%end%>
 </h1>
-<div><%=link_to "Edit profile", edit_profile_path(@profile), class:"bg-blue-400 w-48 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full" if current_user == @profile.user%></div>
-<%if FolloweesFollower.exists?(follower_id: current_user.id, followee_id: @profile.user.id)%>
-  <%= button_to 'Unfollow', followees_follower_path(follower_id: current_user.id, followee_id: @profile.user.id), method: :delete, class:"rounded-xl bg-slate-600 p-2 text-teal-400 hover:bg-slate-400 hover:text-teal-700" %>
-<%end%>
+<div class ="p-4 flex justify-end">
+  <%=link_to "Edit profile", edit_profile_path(@profile), class:"bg-blue-400 w-fit text-center mt-5 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full" if current_user == @profile.user%>
+  <%if FolloweesFollower.exists?(follower_id: current_user.id, followee_id: @profile.user.id)%>
+    <%= button_to 'Unfollow', followees_follower_path(follower_id: current_user.id, followee_id: @profile.user.id), method: :delete, class:"bg-transparent hover:bg-blue-500 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full" %>
+  <%end%>
+</div>
 <%if current_user == @profile.user && current_user.pending_requests.pending.any?%>
-  <div class ="flex flex-col">
-    <p>You have friend requests by:</p>
+  <div class ="flex flex-col gap-1 p-4">
+    <p class="text-white">You have friend requests by:</p>
     <ul class = "grid grid-flow-col auto-rows-max md:auto-rows-min">
       <%current_user.pending_requests.pending.each do |request|%>
-        <li class ="border-2 rounded-md flex flex-col p-2 gap-2 size-fit border-gray-600 bg-slate-300 hover:text-teal-700 text-teal-500">
-          <p><%=link_to "#{request.requester.profile.full_name}", profile_path(request.requester.profile)%></p>
+        <li class ="border-2 rounded-md flex flex-col p-2 gap-2 size-fit text-center  text-white">
+          <p class="text-semibold hover:bg-sky-700 hover:text-slate-200 rounded-full"><%=link_to "#{request.requester.profile.full_name}", profile_path(request.requester.profile)%></p>
           <div class = "flex gap-2">
             <div><%= render partial: "shared/accept_form", locals: { request: request } %></div>
             <div><%= render partial: "shared/reject_form", locals: { request: request } %></div>
@@ -37,8 +39,7 @@
     <%= render partial: "shared/request_form", locals: { follow_request_form: @follow_request } %>
   <%end%>
 </div>
-<h3 class ="text-2xl">Latest posts</h3>
-<div>
+<div class="p-4">
   <% @profile.user.posts.each do |post|%>
     <%= render partial: "shared/post", locals: { post: post } %>
   <%end%>

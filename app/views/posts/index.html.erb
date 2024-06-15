@@ -1,8 +1,18 @@
 <div class = "flex">
-  <div class="flex-1">
-    <div id="new_post" class ="p-4 flex flex-col gap-2">
-      <%= render partial: "shared/form", locals: { model: Post.new } %>
+  <div class="flex-1 flex gap-1 flex-col py-4 pl-4">
+    <div class="flex py-4 gap-4">
+      <div class="">
+        <%if current_user.profile.avatar.attached?%>
+          <%= image_tag current_user.profile.avatar, class: "w-11 rounded-full" %>
+        <%else%>
+          <img src="<%= image_path('default.jpg') %>" alt="default profile picture", class="w-11 rounded-full">
+        <%end%>
+      </div>
+      <div id="new_post" class ="flex flex-col  w-full gap-2">
+        <%= render partial: "shared/form", locals: { model: Post.new } %>
+      </div>
     </div>
+    <hr class="border-sky-700 border-4">
     <div id="posts">
       <% @posts.each do |post|%>
         <%= render partial: "shared/post", locals: { post: post } %>
