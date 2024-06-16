@@ -1,9 +1,9 @@
-<div class="flex flex-col gap-3">
+<div class="flex flex-col p-4 gap-3">
   <%- if controller_name != 'sessions' %>
-    <%= link_to "Log in", new_session_path(resource_name),class:"bg-blue-400 w-48 text-center mt-5 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full" %><br />
+    <%= link_to "Log in", new_session_path(resource_name),class:"bg-blue-400 w-fit text-center mt-5 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full" %><br />
   <% end %>
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-    <%= link_to "Sign up", new_registration_path(resource_name), class:"bg-blue-400 w-48 text-center mt-5 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full" %><br />
+    <%= link_to "Sign up", new_registration_path(resource_name), class:"bg-blue-400 w-fit text-center mt-5 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full" %><br />
   <% end %>
   <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
     <%= link_to "Forgot your password?", new_password_path(resource_name), class:"bg-blue-400 w-fit mt-5 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full" %><br />
