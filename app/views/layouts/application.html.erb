@@ -15,10 +15,10 @@
       <main class="container flex-1 border-slate-400 border-l-2">
         <div class="flex justify-center w-full">
           <% if notice.present? %>
-            <p class= "p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-100 w-3/4 text-center"><%= notice %></p>
+            <p class= "p-2 mb-4 text-sm text-green-800 rounded-full bg-green-100 w-3/4 text-center"><%= notice %></p>
           <% end %>
           <% if alert.present? %>
-            <p class= "p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-100 w-3/4 text-center"><%= alert %></p>
+            <p class= "p-2 mb-4 text-sm text-red-800 rounded-full bg-red-100 w-3/4 text-center"><%= alert %></p>
           <% end %>
         </div>
         <%= yield %>
