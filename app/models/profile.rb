@@ -6,7 +6,7 @@ class Profile < ApplicationRecord
   before_save :normalize_name
 
   def full_name
-    "#{first_name} #{last_name}"
+    "#{first_name.titleize} #{last_name.titleize}"
   end
 
   private
