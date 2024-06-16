@@ -51,8 +51,8 @@ Rails.application.configure do
       port: 587,
       domain: 'gmail.com', # you can also use google.com
       authentication: :plain,
-      user_name: Rails.application.credentials.gmail.user_name,
-      password: Rails.application.credentials.gmail.password
+      user_name: Rails.application.credentials.dig(:gmail, :user_name),
+      password: Rails.application.credentials.dig(:gmail, :password)
     }
 
   # Print deprecation notices to the Rails logger.
