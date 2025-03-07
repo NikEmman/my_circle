@@ -17,3 +17,13 @@
 # Comment.find_or_create_by(body: " I'm Mickey's comment on Goofey's post", post_id: 2, user_id: 1)
 # LikerLikedPost.find_or_create_by(liker_id: 1, liked_post_id: 1)
 # LikerLikedComment.find_or_create_by(liker_id: 2, liked_comment_id: 2)
+User.create(email: 'donald@mail.com', password: 'password', password_confirmation: 'password', role: User.roles[:admin])
+User.create(email: 'goofey@mail.com', password: 'password', password_confirmation: 'password', role: User.roles[:user])
+
+10.times do |x|
+  post = Post.create(body: "Body #{x}", user_id: User.first.id)
+
+  5.times do |y|
+    Comment.create(body: "Comment #{y}", user_id: User.second.id, post_id: post.id)
+  end
+end

@@ -74,7 +74,7 @@ class CommentsController < ApplicationController
   end
 
   def require_permission
-    return unless current_user != Comment.find(params[:id]).user
+    return unless current_user != Comment.find(params[:id]).user || current_user.admin?
 
     redirect_to root_path, alert: 'You are not the creator of this comment'
   end

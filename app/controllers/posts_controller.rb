@@ -79,7 +79,7 @@ class PostsController < ApplicationController
   end
 
   def require_permission
-    return unless current_user != Post.find(params[:id]).user
+    return unless current_user != Post.find(params[:id]).user || current_user.admin?
 
     redirect_to root_path, alert: 'You are not the creator of this post'
   end

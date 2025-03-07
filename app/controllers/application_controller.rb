@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
   private
 
   def ensure_profile_exists
-    return if current_user.profile.present?
+    return if current_user.profile.present? || current_user.admin?
 
     flash[:alert] = 'Please create a profile first'
-    redirect_to new_profile_path # replace with your profile creation path
+    redirect_to new_profile_path
   end
 end

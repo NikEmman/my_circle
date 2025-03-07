@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  authenticated :user, ->(user) { user.admin? } do
+    get 'admin', to: 'admin#index'
+    get 'admin/posts'
+    get 'admin/comments'
+    get 'admin/users'
+  end
   root 'posts#index'
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
