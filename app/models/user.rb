@@ -10,8 +10,8 @@ class User < ApplicationRecord
   has_many :liker_liked_posts, foreign_key: 'liker_id', dependent: :destroy
   has_many :liked_posts, through: :liker_liked_posts, source: :liked_post
   has_many :liked_comments, through: :liker_liked_comments, source: :liked_comment
-  has_many :follow_requests, class_name: 'FollowRequest', foreign_key: 'requester_id'
-  has_many :pending_requests, class_name: 'FollowRequest', foreign_key: 'approver_id'
+  has_many :follow_requests, class_name: 'FollowRequest', foreign_key: 'requester_id', dependant: :destroy
+  has_many :pending_requests, class_name: 'FollowRequest', foreign_key: 'approver_id', dependant: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
