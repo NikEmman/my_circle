@@ -4,8 +4,12 @@ class PostsController < ApplicationController
   before_action :ensure_profile_exists
 
   def index
-    @posts = current_user.posts
-    @posts += current_user.followees.flat_map(&:posts)
+    @posts = current_user.posts.includes(:likers, comments: :liker_liked_comments)
+    followee_posts = current_user.followees.flat_map do |followee|
+      followee.posts.includes(comments: :liker_liked_comments)
+    end
+    @posts += followee_posts
+
     @posts.sort_by! { |post| -post.created_at.to_i }
   end
 
@@ -79,7 +83,8 @@ class PostsController < ApplicationController
   end
 
   def require_permission
-    return unless current_user != Post.find(params[:id]).user || current_user.admin?
+    post = Post.find(params[:id]).includes(:likers, comments: :liker_liked_comments)
+    return if post.user || current_user.admin?
 
     redirect_to root_path, alert: 'You are not the creator of this post'
   end

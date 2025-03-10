@@ -24,9 +24,10 @@
   <div class="flex items-center">
     <div class="flex  grow items-center gap-1 w-fit">
       <div class="flex items-center gap-1">
-        <p><%=post.likers.count%> like(s)</p>
-        <% if LikerLikedPost.exists?(liker_id: current_user.id, liked_post_id: post.id) %>
-          <%= button_to '-♡', post_liker_liked_post_path(post_id: post.id, id: LikerLikedPost.find_by(liker_id: current_user.id, liked_post_id: post.id).id), method: :delete, class:"w-12 mt-1 group flex items-center text-slate-200 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-sky-700 hover:text-blue-300" %>
+        <p><%=pluralize(post.likers.length,"like(s)")%> </p>
+        <%if post.likers.any?{|liker| liker.id==current_user.id}%>
+        <%# if LikerLikedPost.exists?(liker_id: current_user.id, liked_post_id: post.id) %>
+<!---->          <%= button_to '-♡', post_liker_liked_post_path(post_id: post.id, id: LikerLikedPost.find_by(liker_id: current_user.id, liked_post_id: post.id).id), method: :delete, class:"w-12 mt-1 group flex items-center text-slate-200 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-sky-700 hover:text-blue-300" %>
         <% else %>
           <%= form_with model: [post, LikerLikedPost.new], local: true do |form| %>
             <%= form.submit "♡" , class:"w-12 mt-1 group flex items-center text-slate-200 px-3 py-2 text-base leading-6 font-medium rounded-full hover:bg-sky-700 hover:text-blue-300"%>
@@ -54,7 +55,7 @@
     </div>
     <div class="flex items-center">
       <div class="text-center w-fit py-2 m-2">
-        <%="#{post.comments.count} Comments"%>
+        <%= pluralize(post.comments.length, "Comments")%>
       </div>
     </div>
   </div>

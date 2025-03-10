@@ -1,4 +1,7 @@
 <div>
-  <h1 class="font-bold text-4xl">Admin#comments</h1>
+  <h1 class="font-bold text-4xl text-center">Admin#comments</h1>
   <p>Find me in app/views/admin/comments.html.erb</p>
+  <% @comments.each do |comment| %>
+  <p> <%=comment.body %>  || <%=comment.user.email %> || <%comment.post.body.truncate(15)%> </p> <%=link_to "edit",edit_post_comment_url(comment.post,comment)%>
+  <%end%>
 </div>
